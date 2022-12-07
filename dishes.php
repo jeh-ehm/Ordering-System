@@ -221,8 +221,6 @@ $item_total += ($item["price"]*$item["quantity"]);
                             
                                 <div>
                                     <p><span><a href="index.php" class="btn btn-primary">Back to Categories</a></span><center>ORDER NOW!</center></p>
-                                    
-                                    
                                 </div> 
                              <a class="btn btn-link pull-right" data-toggle="collapse" href="#popular2" aria-expanded="true">
                         <div class="menu-widget" id="1">

@@ -264,9 +264,11 @@ div.result-show {
 														  <td data-column="price">$<?php echo $row['price']; ?></td>
 														   <td data-column="status"> 
 														   <?php 
+														   		$disabled = "disabled";
 																			$status=$row['status'];
 																			if($status=="" or $status=="NULL")
 																			{
+																				$disabled = "";
 																			?>
 																			<button type="button" class="btn btn-info"><span class="fa fa-bars"  aria-hidden="true" ></span> Dispatch</button>
 																		   <?php 
@@ -300,7 +302,7 @@ div.result-show {
 														   </td>
 														  <td data-column="Date"> <?php echo $row['date']; ?></td>
 														   <td data-column="Action">
-															<a href="delete_orders.php?order_del=<?php echo $row['o_id'];?>" onclick="return confirm('Are you sure you want to cancel your order?');" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
+															<a href="delete_orders.php?order_del=<?php echo $row['o_id'];?>" onclick="return confirm('Are you sure you want to cancel your order?');" class=" <?php echo $disabled ?>  btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
 														   	<button class="btn btn-info btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-clipboard"></i></button>
 															</td>
 															

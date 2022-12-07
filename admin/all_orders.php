@@ -146,12 +146,10 @@ session_start();
                                                                 <td>'.$rows['address'].'</td>';
 
                                                                 $status=$rows['status'];
-                                                                $btn = "<a href=\"delete_orders.php?order_del=" . $rows['o_id'] . "onclick=\"return confirm('Are you sure?');\" class=\"btn btn-danger btn-flat btn-addon btn-xs m-b-10 disabled\"><i class=\"fa fa-trash-o\" style=\"font-size:16px\"></i></a>";
                                                                 $dropdownToggle = '<button class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
                                                                 
                                                                 if($status=="" or $status=="NULL")
                                                                 {
-                                                                    $btn = "<a href=\"delete_orders.php?order_del=" . $rows['o_id'] . "onclick=\"return confirm('Are you sure?');\" class=\"btn btn-danger btn-flat btn-addon btn-xs m-b-10\"><i class=\"fa fa-trash-o\" style=\"font-size:16px\"></i></a>";
                                                                     
                                             ?>
 
@@ -185,9 +183,7 @@ session_start();
                                                 echo '<td>'.$rows['date'].'</td>';
                                             ?>
                                             <td style="display: flex">
-                                            <?php 
-                                                echo($btn);
-                                            ?>
+                                                <a href="delete_orders.php?order_del=<?php echo $rows['o_id'];?>" onclick="return confirm('Are you sure?');" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a>
                                             <?php
                                                 echo '<div class="dropdown">
                                                  '. $dropdownToggle.'
