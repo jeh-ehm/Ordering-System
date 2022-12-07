@@ -144,13 +144,15 @@ session_start();
                                                                 <td>'.$rows['quantity'].'</td>
                                                                 <td>$'.$rows['price'].'</td>
                                                                 <td>'.$rows['address'].'</td>';
-                                                                
+
                                                                 $status=$rows['status'];
                                                                 $btn = "<a href=\"delete_orders.php?order_del=" . $rows['o_id'] . "onclick=\"return confirm('Are you sure?');\" class=\"btn btn-danger btn-flat btn-addon btn-xs m-b-10 disabled\"><i class=\"fa fa-trash-o\" style=\"font-size:16px\"></i></a>";
+                                                                $dropdownToggle = '<button class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
                                                                 
                                                                 if($status=="" or $status=="NULL")
                                                                 {
                                                                     $btn = "<a href=\"delete_orders.php?order_del=" . $rows['o_id'] . "onclick=\"return confirm('Are you sure?');\" class=\"btn btn-danger btn-flat btn-addon btn-xs m-b-10\"><i class=\"fa fa-trash-o\" style=\"font-size:16px\"></i></a>";
+                                                                    
                                             ?>
 
                                             <td> <button type="button" class="btn btn-info"><span class="fa fa-bars" aria-hidden="true"></span> Dispatch</button></td>
@@ -164,6 +166,7 @@ session_start();
                                                 }
                                                 if($status=="closed")
                                                     {
+                                                    $dropdownToggle = '<button class=" disabled btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
                                             ?>
                                             <td> <button type="button" class="btn btn-primary"><span class="fa fa-check-circle" aria-hidden="true"></span> Delivered</button></td>
                                             <?php 
@@ -172,6 +175,7 @@ session_start();
                                             <?php
                                                 if($status=="rejected")
                                                     {
+                                                    $dropdownToggle = '<button class=" disabled btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
                                             ?>
                                             <td> <button type="button" class="btn btn-danger"> <i class="fa fa-close"></i> Cancelled</button></td>
                                             <?php 
@@ -180,12 +184,21 @@ session_start();
                                             <?php																									
                                                 echo '<td>'.$rows['date'].'</td>';
                                             ?>
-                                            <td>
+                                            <td style="display: flex">
                                             <?php 
                                                 echo($btn);
                                             ?>
                                             <?php
-                                                echo '<a href="view_order.php?user_upd='.$rows['o_id'].'" " class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5"><i class="fa fa-edit"></i></a>
+                                                echo '<div class="dropdown">
+                                                 '. $dropdownToggle.'
+                                                            <i class="fa fa-edit"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="update_order.php?row_id='.$rows['o_id'].'&status=in process"> <span class="fa fa-cog fa-spin" aria-hidden="true"></span> On the Way</a>
+                                                            <a class="dropdown-item" href="update_order.php?row_id='.$rows['o_id'].'&status=closed"> <span class="fa fa-check-circle" aria-hidden="true"></span> Delivered</a>
+                                                            <a class="dropdown-item" href="update_order.php?row_id='.$rows['o_id'].'&status=rejected"> <i class="fa fa-close"></i> Cancelled</a>
+                                                        </div>
+                                                    </div>
                                                     </td>
                                                     </tr>';					
                                                     }	
