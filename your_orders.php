@@ -259,58 +259,58 @@ div.result-show {
 						
 							?>
 												<tr>	
-														 <td data-column="Item"> <?php echo $row['title']; ?></td>
-														  <td data-column="Quantity"> <?php echo $row['quantity']; ?></td>
-														  <td data-column="price">$<?php echo $row['price']; ?></td>
-														   <td data-column="status"> 
-														   <?php 
-														   		$disabled = "disabled";
-																			$status=$row['status'];
-																			if($status=="" or $status=="NULL")
-																			{
-																				$disabled = "";
-																			?>
-																			<button type="button" class="btn btn-info"><span class="fa fa-bars"  aria-hidden="true" ></span> Dispatch</button>
-																		   <?php 
-																			  }
-																			   if($status=="in process")
-																			 { ?>
-																				<button type="button" class="btn btn-warning"><span class="fa fa-cog fa-spin"  aria-hidden="true" ></span> On The Way!</button>
-																			<?php
-																				}
-																			if($status=="closed")
-																				{
-																			?>
-																			 <button type="button" class="btn btn-success" ><span  class="fa fa-check-circle" aria-hidden="true"></span> Delivered</button> 
-																			<?php 
-																			} 
-																			?>
-																			<?php
-																			if($status=="rejected")
-																				{
-																			?>
-																			 <button type="button" class="btn btn-danger"> <i class="fa fa-close"></i> Cancelled</button>
-																			<?php 
-																			} 
-																			?>	   
-														   </td>
-														  <td data-column="Date"> <?php echo $row['date']; ?></td>
-														   <td data-column="Action">
-															<a href="delete_orders.php?order_del=<?php echo $row['o_id'];?>" onclick="return confirm('Are you sure you want to cancel your order?');" class=" <?php echo $disabled ?>  btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
-														   	<button class="btn btn-info btn-flat btn-addon btn-xs m-b-10 receiptBtn"><i class="fa fa-clipboard"></i></button>
-															</td>		 
+													<td data-column="Item"> <?php echo $row['title']; ?></td>
+													<td data-column="Quantity"> <?php echo $row['quantity']; ?></td>
+													<td data-column="price">$<?php echo $row['price']; ?></td>
+													<td data-column="status"> 
+													<?php 
+														$disabled = "disabled";
+														$status=$row['status'];
+														if($status=="" or $status=="NULL")
+														{
+															$disabled = "";
+														?>
+														<button type="button" class="btn btn-info"><span class="fa fa-bars"  aria-hidden="true" ></span> Dispatch</button>
+														<?php 
+															}
+															if($status=="in process")
+															{ ?>
+															<button type="button" class="btn btn-warning"><span class="fa fa-cog fa-spin"  aria-hidden="true" ></span> On The Way!</button>
+														<?php
+															}
+														if($status=="closed")
+															{
+														?>
+															<button type="button" class="btn btn-success" ><span  class="fa fa-check-circle" aria-hidden="true"></span> Delivered</button> 
+														<?php 
+														} 
+														?>
+														<?php
+														if($status=="rejected")
+															{
+														?>
+															<button type="button" class="btn btn-danger"> <i class="fa fa-close"></i> Cancelled</button>
+														<?php 
+														} 
+														?>	   
+													</td>
+													<td data-column="Date"> <?php echo $row['date']; ?></td>
+													<td data-column="Action">
+													<a href="delete_orders.php?order_del=<?php echo $row['o_id'];?>" onclick="return confirm('Are you sure you want to cancel your order?');" class=" <?php echo $disabled ?>  btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
+													<button class="btn btn-info btn-flat btn-addon btn-xs m-b-10 receiptBtn"><i class="fa fa-clipboard"></i></button>
+													</td>		 
 												</tr>		
-														<?php }} ?>								
-						  </tbody>
-					</table>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
+										<?php }} ?>								
+									</tbody>
+								</table>
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
 
 	<div class="modal" id="receiptModal">
 		<div class="modalContent">
