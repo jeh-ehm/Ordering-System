@@ -185,7 +185,7 @@ img {
 											   
                                                     <tr>
                                                         <td>Cart Subtotal</td>
-                                                        <td> <?php echo "$".$item_total; ?></td>
+                                                        <td> <?php echo "₱".$item_total; ?></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Delivery Charges</td>
@@ -193,7 +193,7 @@ img {
                                                     </tr>
                                                     <tr>
                                                         <td class="text-color"><strong>Total</strong></td>
-                                                        <td class="text-color"><strong> <?php echo "$".$item_total; ?></strong></td>
+                                                        <td class="text-color"><strong> <?php echo "₱".$item_total; ?></strong></td>
                                                     </tr>
                                                 </tbody>
 												
@@ -224,17 +224,18 @@ img {
             <STYLE>
                 </STYLE>
             <footer class="footer">
-                    <div class="row bottom-footer">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-4 address color-gray">
-                                    <h5>Address</h5>
-                                    <p>1086 Stockert Hollow Road, Seattle</p>
-                                    <h5>Phone: 75696969855</a></h5> </div>
-                                <div class="col-xs-12 col-sm-5 additional-info color-gray">
-                                    <h5>Addition informations</h5>
-                                   <p>Join thousands of other restaurants who benefit from having partnered with us.</p>
-                                </div>
+            <div class="container">
+                <div class="bottom-footer">
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-4 payment-options color-gray">
+                            <h5>ADDRESS:</h5>
+                            <p>Maligaya, Gloria Oriental Mindoro <br>near Sacred Heart Parish</p>
+                        </div>
+                        <div class="col-xs-5 col-sm-3 address color-gray">
+                                    <h5>PHONE NUMBER:</h5> 
+                                    <p>09773952367</p></div>
+                                    <h5>M en M Snackhouse Ordering System</h5>
+                                   <p>by: GASANG's Group (BSIT DEPARTMENT) </p>
                             </div>
                         </div>
                     </div>

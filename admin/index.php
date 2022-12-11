@@ -58,7 +58,7 @@ if(isset($_POST['submit']))
     <input type="text" placeholder="Username" name="username" required/>
     <input type="password" placeholder="Password" name="password" required/>
     <input type="submit"  name="submit" value="Login" />
-    <a href="registration/">Register Admin Credentials</a>
+    <a href="registration/" style="text-decoration: none;">Register Admin Credentials</a>
 
   </form>
   

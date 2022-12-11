@@ -11,25 +11,32 @@ require_once("../../connection/connect.php");
 
         $findUsername = mysqli_query($db, "SELECT username FROM admintbl");
 
-        if ($findUsername) {
-            while ($result = mysqli_fetch_array($findUsername)) {
-                if ($username == $result['username']) {
-                    echo '<script>alert("Username Taken!");</script>';
-            } else {
-                if ($password == $repass) {
-                    $insertUser = mysqli_query($db, "INSERT INTO admintbl(Firstname,Lastname,Username,Password) VALUES('$fName','$lName','$username','$password')");
-                    if ($insertUser) {
-                        echo '<script>alert("Successfully Registered!");</script>';
-                    } else {
-                        echo '<script>alert("Error Found!");</script>';
-                    }
-                }
-                else {
-                    echo '<script>alert("Password and re-enter password does\'t match!");</script>';
-                }
-             }
+        $userExist = false;
+
+        do {
+            $result = mysqli_fetch_array($findUsername);
+            if ($username == $result['username']) {
+                $userExist = true;
+                break;
             }
-        }
+        } while ($result);
+
+        if ($userExist) {
+            echo '<script>alert("Username Taken!");</script>';
+        } else {
+            if ($password == $repass) {
+                $insertUser = mysqli_query($db, "INSERT INTO admintbl(Firstname,Lastname,Username,Password) VALUES('$fName','$lName','$username','$password')");
+                if ($insertUser) {
+                    echo '<script>alert("Successfully Registered!");</script>';
+                    echo "<script>window.location.href='../../admin'</script>";
+                    
+                } else {
+                    echo '<script>alert("Error Found!");</script>';
+                  }
+            } else {
+                echo '<script>alert("Password and re-enter password does\'t match!");</script>';
+              }
+          }
     }
 ?>
 
@@ -63,9 +70,10 @@ require_once("../../connection/connect.php");
     <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
+                
                 <div class="card-body">
                     <h2 class="title">Admin Registration Form</h2>
-                    <form method="POST">
+                    <form method="POST" action="">
                         <div class="input-group">
                             <div>
                                 <div class="input-group">
@@ -106,7 +114,9 @@ require_once("../../connection/connect.php");
                         </div>
                         <div class="p-t-15">
                             <button class="btn btn--radius-2 btn--purple" type="submit" name="submit">Submit</button>
+                            <a href="../../admin" class="btn btn--radius-2 btn--purple" style="text-decoration: none;">Back to Login</a>
                         </div>
+                        
                     </form>
                 </div>
             </div>

@@ -5439,6 +5439,7 @@ tbody tr td:last-child {
 }
 .table {
   margin-bottom: 0;
+  min-height: 60vh  ;
 }
 .table .badge {
   text-transform: uppercase;

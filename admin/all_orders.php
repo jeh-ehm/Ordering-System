@@ -124,7 +124,7 @@ session_start();
                             </div>
                              
                                 <div class="table-responsive m-t-40">
-                                    <table id="myTable" class="table table-bordered table-striped">
+                                    <table id="myTable" class="table table-bordered table-striped" style="min-height: 40vh;">
                                     <thead class="thead-dark">
                                             <tr>
                                                 <th>User</th>		
@@ -133,14 +133,11 @@ session_start();
                                                 <th>Price</th>
 												<th>Address</th>
 												<th>Status</th>												
-												 <th>Reg-Date</th>
-												  <th>Action</th>
-												 
+												<th>Reg-Date</th>
+											    <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           
-											
 											<?php
 												$sql="SELECT users.*, users_orders.* FROM users INNER JOIN users_orders ON users.u_id=users_orders.u_id ";
 												$query=mysqli_query($db,$sql);
@@ -160,11 +157,12 @@ session_start();
 																					           <td>'.$rows['username'].'</td>
 																								<td>'.$rows['title'].'</td>
 																								<td>'.$rows['quantity'].'</td>
-																								<td>$'.$rows['price'].'</td>
+																								<td>₱'.$rows['price'].'</td>
 																								<td>'.$rows['address'].'</td>';
 																								?>
 																								<?php 
 																			$status=$rows['status'];
+                                                                            $dropdownToggle = '<button class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
 																			if($status=="" or $status=="NULL")
 																			{
 																			?>
@@ -178,6 +176,7 @@ session_start();
 																				}
 																			if($status=="closed")
 																				{
+                                                                                    $dropdownToggle = '<button class=" disabled btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
 																			?>
 																			<td> <button type="button" class="btn btn-primary" ><span  class="fa fa-check-circle" aria-hidden="true"></span> Delivered</button></td> 
 																			<?php 
@@ -186,6 +185,7 @@ session_start();
 																			<?php
 																			if($status=="rejected")
 																				{
+                                                                                $dropdownToggle = '<button class=" disabled btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
 																			?>
 																			<td> <button type="button" class="btn btn-danger"> <i class="fa fa-close"></i> Cancelled</button></td> 
 																			<?php 
@@ -194,12 +194,21 @@ session_start();
 																						<?php																									
 																							echo '	<td>'.$rows['date'].'</td>';
 																							?>
-																									 <td>
+																									 <td style="display: flex">
 																									 <a href="delete_orders.php?order_del=<?php echo $rows['o_id'];?>" onclick="return confirm('Are you sure?');" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
 																								<?php
-																								echo '<a href="view_order.php?user_upd='.$rows['o_id'].'" " class="btn btn-info btn-flat btn-addon btn-sm m-b-10 m-l-5"><i class="fa fa-edit"></i></a>
-																									</td>
-																									</tr>';
+																								 echo '<div class="dropdown">
+                                                                                                 '. $dropdownToggle.'
+                                                                                                            <i class="fa fa-edit"></i>
+                                                                                                        </button>
+                                                                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                                                            <a class="dropdown-item" href="update_order.php?row_id='.$rows['o_id'].'&status=in process"> <span class="fa fa-cog fa-spin" aria-hidden="true"></span> On the Way</a>
+                                                                                                            <a class="dropdown-item" href="update_order.php?row_id='.$rows['o_id'].'&status=closed"> <span class="fa fa-check-circle" aria-hidden="true"></span> Delivered</a>
+                                                                                                            <a class="dropdown-item" href="update_order.php?row_id='.$rows['o_id'].'&status=rejected"> <i class="fa fa-close"></i> Cancelled</a>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    </td>
+                                                                                                    </tr>';			
 																					 
 																						
 																						

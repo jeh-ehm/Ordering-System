@@ -90,7 +90,7 @@ td, th {
 	text-align: left; 
 	font-size: 14px;
 	
-	} */ */
+	} */ 
 
 
 @media 
@@ -261,7 +261,7 @@ div.result-show {
 												<tr>	
 													<td data-column="Item"> <?php echo $row['title']; ?></td>
 													<td data-column="Quantity"> <?php echo $row['quantity']; ?></td>
-													<td data-column="price">$<?php echo $row['price']; ?></td>
+													<td data-column="price">₱<?php echo $row['price']; ?></td>
 													<td data-column="status"> 
 													<?php 
 														$disabled = "disabled";
@@ -363,7 +363,7 @@ div.result-show {
 			$.each($itemName, function() {
 				var $name =  $(this).text();
 				$.each($quantity, function() {
-					document.getElementById("orderItem").innerHTML = $(this).text() + "x" + $name;
+					document.getElementById("orderItem").innerHTML = $(this).text() + "x " + $name;
 				});
 			});
 

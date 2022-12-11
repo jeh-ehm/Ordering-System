@@ -33,10 +33,6 @@ session_start();
                 <div class="navbar-collapse">
                     <ul class="navbar-nav mr-auto mt-md-0">
                     </ul>
-                    
-                       
-                      
-                      
                     <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="images/bookingSystem/user-icn.png" alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
@@ -242,7 +238,7 @@ session_start();
                         <div class="card p-30">
                             <div class="media">
                                 <div class="media-left meida media-middle"> 
-                                    <span><i class="fa fa-usd f-s-40" aria-hidden="true"></i></span>
+                                    <span class="f-s-40">₱</span>
                                 </div>
                                 <div class="media-body media-text-right">
                                     <h2><?php 
