@@ -8,18 +8,19 @@ if(isset($_POST['submit']))
 {
 	$username = $_POST['username'];
 	$password = $_POST['password'];
-	
-	
-  if($password == $password && $username == $username)
-  {
-    //check
-          $loginquery = "INSERT INTO admin(username,password,email) value('$username','$password','$email')";
-          $result=mysqli_query($db, $loginquery);
-          if($loginquery){
-           echo "<script>alert('WELCOME DEAR ADMIN! ');</script>";
-              header("refresh:1;url=dashboard.php");
-          }
-      }
+
+  $checkuser = mysqli_query($db, "SELECT * FROM admintbl where Username = '$username' AND Password = '$password'");
+
+  if ($checkuser) {
+    if ($res = mysqli_fetch_array($checkuser)) {
+          echo "<script>alert('WELCOME ADMIN! $res[1]');</script>";
+          header("refresh:1;url=dashboard.php");
+    } else {
+      echo "<script>alert('Admin Credentials not found');</script>";
+    }
+  } else {
+    echo "<script>alert('Error Found');</script>";
+  }
       
   }
 
@@ -54,9 +55,10 @@ if(isset($_POST['submit']))
   <span style="color:red;"><?php echo $message; ?></span>
    <span style="color:green;"><?php echo $success; ?></span>
   <form class="login-form" action="index.php" method="post">
-    <input type="text" placeholder="Username" name="username"/>
-    <input type="password" placeholder="Password" name="password"/>
+    <input type="text" placeholder="Username" name="username" required/>
+    <input type="password" placeholder="Password" name="password" required/>
     <input type="submit"  name="submit" value="Login" />
+    <a href="registration/">Register Admin Credentials</a>
 
   </form>
   

@@ -8,38 +8,30 @@ session_start();
 
 if(isset($_POST['submit'] ))
 {
-    if(empty($_POST['c_name']))
-		{
-			$error = '<div class="alert alert-danger alert-dismissible fade show">
-																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<strong>field Required!</strong>
-															</div>';
+    if(empty($_POST['c_name'])){
+        $error = '<div class="alert alert-danger alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>field Required!</strong>
+        </div>';
 		}
-	else
-	{
-		
-	$check_cat= mysqli_query($db, "SELECT c_name FROM res_category where c_name = '".$_POST['c_name']."' ");
+	else {
+		$check_cat= mysqli_query($db, "SELECT c_name FROM res_category where c_name = '".$_POST['c_name']."' ");	
+        if(mysqli_num_rows($check_cat) > 0)
+        {
+            $error = '<div class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Category already exist!</strong>
+            </div>';
+        }
+        else{
 
-	
-	
-	if(mysqli_num_rows($check_cat) > 0)
-     {
-    	$error = '<div class="alert alert-danger alert-dismissible fade show">
-																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<strong>Category already exist!</strong>
-															</div>';
-     }
-	else{
-       
-	
-	$mql = "INSERT INTO res_category(c_name) VALUES('".$_POST['c_name']."')";
-	mysqli_query($db, $mql);
-			$success = 	'<div class="alert alert-success alert-dismissible fade show">
-																<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																New Category Added Successfully.</br></div>';
-	
+            $mql = "INSERT INTO res_category(c_name) VALUES('".$_POST['c_name']."')";
+            mysqli_query($db, $mql);
+            $success = 	'<div class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            New Category Added Successfully.</br></div>';
+        }
     }
-	}
 
 }
 

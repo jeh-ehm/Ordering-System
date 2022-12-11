@@ -3,12 +3,7 @@
 include("../connection/connect.php");
 error_reporting(0);
 session_start();
-if(strlen($_SESSION['user_id'])==0)
-  { 
-header('location:../login.php');
-}
-else
-{
+
   if(isset($_POST['update']))
   {
 $form_id=$_GET['form_id'];
@@ -145,7 +140,7 @@ td, th {
     </tr>
 
 
-      <tr>
+      <tr >
       <td><b>Message</b></td>
       <td><textarea name="remark" cols="50" rows="10" required="required"></textarea></td>
     </tr>
@@ -172,5 +167,3 @@ td, th {
 
 </body>
 </html>
-
-     <?php } ?>

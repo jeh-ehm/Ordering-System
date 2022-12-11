@@ -259,82 +259,58 @@ div.result-show {
 						
 							?>
 												<tr>	
-														 <td data-column="Item"> <?php echo $row['title']; ?></td>
-														  <td data-column="Quantity"> <?php echo $row['quantity']; ?></td>
-														  <td data-column="price">₱<?php echo $row['price']; ?></td>
-														   <td data-column="status"> 
-														   <?php 
-																			$status=$row['status'];
-																			if($status=="" or $status=="NULL")
-																			{
-																			?>
-																			<button type="button" class="btn btn-info"><span class="fa fa-bars"  aria-hidden="true" ></span> Dispatch</button>
-																		   <?php 
-																			  }
-																			   if($status=="in process")
-																			 { ?>
-																				<button type="button" class="btn btn-warning"><span class="fa fa-cog fa-spin"  aria-hidden="true" ></span> On The Way!</button>
-																			<?php
-																				}
-																			if($status=="closed")
-																				{
-																			?>
-																			 <button type="button" class="btn btn-success" ><span  class="fa fa-check-circle" aria-hidden="true"></span> Delivered</button> 
-																			<?php 
-																			} 
-																			?>
-																			<?php
-																			if($status=="rejected")
-																				{
-																			?>
-																			 <button type="button" class="btn btn-danger"> <i class="fa fa-close"></i> Cancelled</button>
-																			<?php 
-																			} 
-																			?>
-														   
-														   
-														   
-														   
-														   
-														   
-														   </td>
-														  <td data-column="Date"> <?php echo $row['date']; ?></td>
-														   <td data-column="Action">
-															<a href="delete_orders.php?order_del=<?php echo $row['o_id'];?>" onclick="return confirm('Are you sure you want to cancel your order?');" class="btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
-														   	<button class="btn btn-info btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-clipboard"></i></button>
-															</td>
-															
-														 
-												</tr>
-												
-											
-														<?php }} ?>					
-							
-							
-										
-						
-						  </tbody>
-					</table>
-						
-					
-                                    
-                                </div>
-                           
-                            </div>
-                         
-                            
-                                
-                            </div>
-                          
-                          
-                           
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-        
-        </div>
+													<td data-column="Item"> <?php echo $row['title']; ?></td>
+													<td data-column="Quantity"> <?php echo $row['quantity']; ?></td>
+													<td data-column="price">$<?php echo $row['price']; ?></td>
+													<td data-column="status"> 
+													<?php 
+														$disabled = "disabled";
+														$status=$row['status'];
+														if($status=="" or $status=="NULL")
+														{
+															$disabled = "";
+														?>
+														<button type="button" class="btn btn-info"><span class="fa fa-bars"  aria-hidden="true" ></span> Dispatch</button>
+														<?php 
+															}
+															if($status=="in process")
+															{ ?>
+															<button type="button" class="btn btn-warning"><span class="fa fa-cog fa-spin"  aria-hidden="true" ></span> On The Way!</button>
+														<?php
+															}
+														if($status=="closed")
+															{
+														?>
+															<button type="button" class="btn btn-success" ><span  class="fa fa-check-circle" aria-hidden="true"></span> Delivered</button> 
+														<?php 
+														} 
+														?>
+														<?php
+														if($status=="rejected")
+															{
+														?>
+															<button type="button" class="btn btn-danger"> <i class="fa fa-close"></i> Cancelled</button>
+														<?php 
+														} 
+														?>	   
+													</td>
+													<td data-column="Date"> <?php echo $row['date']; ?></td>
+													<td data-column="Action">
+													<a href="delete_orders.php?order_del=<?php echo $row['o_id'];?>" onclick="return confirm('Are you sure you want to cancel your order?');" class=" <?php echo $disabled ?>  btn btn-danger btn-flat btn-addon btn-xs m-b-10"><i class="fa fa-trash-o" style="font-size:16px"></i></a> 
+													<button class="btn btn-info btn-flat btn-addon btn-xs m-b-10 receiptBtn"><i class="fa fa-clipboard"></i></button>
+													</td>		 
+												</tr>		
+										<?php }} ?>								
+									</tbody>
+								</table>
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
 
 	<div class="modal" id="receiptModal">
 		<div class="modalContent">
@@ -363,16 +339,11 @@ div.result-show {
 	<script>
 		
 		var receiptModal = document.getElementById("receiptModal");
-		var receiptBtn = document.getElementsByClassName("btn");
 		var closeBtn = document.getElementsByClassName("closes")[0];
 
 		closeBtn.onclick = function () { 
 			receiptModal.style.display = "none";
 		 }
-		
-		receiptBtn.onclick = function() { 
-			receiptModal.style.display = "block";
-		}
 
 		window.onclick = function(event) {
 			if (event.target == receiptModal) {
@@ -380,22 +351,29 @@ div.result-show {
 			}
 		}
 
-		var tableBody = document.getElementById("tableBody");
+		$(".receiptBtn").click(function() {
 
-		tableBody.onclick = function() {
 			receiptModal.style.display = "block";
-		}
 
-		for (let index = 0; index < tableBody.rows.length; index++) {
+			var $row = $(this).closest("tr"),
+				$itemName = $row.find("td:nth-child(1)"),
+				$quantity = $row.find("td:nth-child(2)"),
+				$total = $row.find("td:nth-child(3)");
 
-			tableBody.rows[index].onclick = function() {
-				document.getElementById("orderItem").innerHTML = this.cells[1].innerHTML + "x " + this.cells[0].innerHTML;
-				document.getElementById("overallTotal").innerHTML = this.cells[2].innerHTML;
-			}
-		}
+			$.each($itemName, function() {
+				var $name =  $(this).text();
+				$.each($quantity, function() {
+					document.getElementById("orderItem").innerHTML = $(this).text() + "x" + $name;
+				});
+			});
+
+			$.each($total, function() {
+				document.getElementById("overallTotal").innerHTML = $(this).text();
+			});
+			
+		});
 
 	</script>
-
 
 </body>
 
